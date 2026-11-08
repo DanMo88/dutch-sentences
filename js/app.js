@@ -159,7 +159,7 @@
     return `
       <section class="home">
         <div class="flag-wrap">
-          <img class="flag" src="images/shir-o-khorshid.svg" width="420" height="240" alt="پرچم تاریخی شیر و خورشید" />
+          <img class="flag" src="images/shir-o-khorshid.svg" width="1050" height="600" alt="پرچم تاریخی شیر و خورشید" />
         </div>
         <p class="eyebrow">سطح مطلق <bdi dir="ltr" lang="en">A1</bdi> · درس ۱</p>
         <div class="home-grow"></div>
@@ -371,7 +371,7 @@
     state.shake = false;
     state.popId = null;
     const theme = document.querySelector('meta[name="theme-color"]');
-    if (theme) theme.setAttribute("content", screen === "home" ? "#102033" : "#fff8f1");
+    if (theme) theme.setAttribute("content", screen === "home" ? "#4f46e5" : "#f5f6ff");
     applyVisual();
     updateVoiceBanner();
     updateSpeechProblem();

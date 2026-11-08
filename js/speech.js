@@ -1,67 +1,28 @@
-/* Slow Dutch speech via the Web Speech API. Calls stay inside the tap handler. */
+/* Same voice as 90 Dagen: pre-generated nl-NL-FennaNeural MP3s at -15%. */
 (function () {
-  const RATE = 0.7;
   const listeners = new Set();
-  let support = "pending";
+  let support = "nl";
   let token = 0;
-  let keepAlive = 0;
+  const au = new Audio();
+  au.preload = "auto";
 
-  function hasSynth() {
-    return typeof window !== "undefined" && "speechSynthesis" in window && window.speechSynthesis;
+  function slug(text) {
+    return String(text).trim().replace(/[.?!]+$/g, "").toLowerCase().replace(/\s+/g, "-");
   }
 
-  function nameOf(voice) {
-    return `${voice.name || ""} ${voice.voiceURI || ""}`;
-  }
-
-  function langOf(voice) {
-    return String(voice.lang || "").toLowerCase().replaceAll("_", "-");
-  }
-
-  function chooseVoice(voices) {
-    let best = null;
-    let bestScore = 0;
-    for (const voice of voices || []) {
-      const lang = langOf(voice);
-      const named = /nederlands|netherlands|dutch|fenna/i.test(nameOf(voice));
-      const nl = lang.startsWith("nl");
-      const nlNl = lang === "nl-nl" || lang.startsWith("nl-nl-");
-      let score = 0;
-      if (nl && named) score = 100;
-      else if (nl) score = 60;
-      else if (named) score = 20;
-      else continue;
-      if (nlNl) score += 15;
-      if (nl && /fenna/i.test(nameOf(voice))) score += 25;
-      if (voice.localService) score += 1;
-      if (score > bestScore) {
-        best = voice;
-        bestScore = score;
-      }
-    }
-    return best;
-  }
-
-  function currentSupport() {
-    if (!hasSynth()) return "unsupported";
-    const voices = window.speechSynthesis.getVoices();
-    if (!voices.length) return "pending";
-    return chooseVoice(voices) ? "nl" : "fallback";
+  function srcFor(text) {
+    const raw = String(text).trim();
+    const kind = /[.?!]$/.test(raw) ? "s" : "w";
+    return "audio/" + kind + "-" + slug(raw) + ".mp3";
   }
 
   function emit() {
-    const next = currentSupport();
-    support = next;
     listeners.forEach((fn) => fn(support));
   }
 
   function init() {
-    if (!hasSynth()) {
-      support = "unsupported";
-      return;
-    }
+    support = "nl";
     emit();
-    window.speechSynthesis.addEventListener("voiceschanged", emit);
   }
 
   function watch(fn) {
@@ -70,105 +31,96 @@
     return () => listeners.delete(fn);
   }
 
-  function makeUtterance(text) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "nl-NL";
-    utterance.rate = RATE;
-    utterance.pitch = 1;
-    utterance.volume = 1;
-    const voice = chooseVoice(window.speechSynthesis.getVoices());
-    if (voice) {
-      try {
-        utterance.voice = voice;
-      } catch (error) {
-        /* Some engines reject a stand-in voice. lang nl-NL still applies. */
-      }
-    }
-    return utterance;
-  }
-
-  function armKeepAlive(my) {
-    window.clearInterval(keepAlive);
-    keepAlive = window.setInterval(() => {
-      if (my !== token || !hasSynth()) {
-        window.clearInterval(keepAlive);
-        return;
-      }
-      const synth = window.speechSynthesis;
-      if (!synth.speaking && !synth.pending) {
-        window.clearInterval(keepAlive);
-        return;
-      }
-      if (synth.paused) synth.resume();
-    }, 1000);
-  }
-
   function stop() {
     token += 1;
-    window.clearInterval(keepAlive);
-    if (!hasSynth()) return;
-    try {
-      window.speechSynthesis.cancel();
-    } catch (error) {
-      /* ignore */
+    try { au.pause(); } catch (error) { /* ignore */ }
+    au.removeAttribute("src");
+    try { au.load(); } catch (error) { /* ignore */ }
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      try { window.speechSynthesis.cancel(); } catch (error) { /* ignore */ }
     }
   }
 
-  function speak(texts, hooks) {
+  function fallbackSpeak(texts, hooks, startAt, my) {
     const done = hooks || {};
-    if (!hasSynth()) {
+    if (!(typeof window !== "undefined" && "speechSynthesis" in window)) {
       done.onError?.("unsupported");
       return;
     }
     const synth = window.speechSynthesis;
-    const my = ++token;
-    try {
-      synth.cancel();
-    } catch (error) {
-      /* ignore */
-    }
+    try { synth.cancel(); } catch (error) { /* ignore */ }
+    texts.slice(startAt).forEach((text, offset) => {
+      const index = startAt + offset;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "nl-NL";
+      utterance.rate = 0.7;
+      utterance.onstart = () => {
+        if (my !== token) return;
+        done.onStart?.(index);
+      };
+      utterance.onend = () => {
+        if (my !== token) return;
+        if (index === texts.length - 1) done.onEnd?.();
+      };
+      utterance.onerror = (event) => {
+        if (my !== token) return;
+        const reason = event.error || "error";
+        if (reason === "canceled" || reason === "interrupted") return;
+        done.onError?.(reason);
+      };
+      synth.speak(utterance);
+    });
+  }
 
-    let heard = false;
-    const enqueue = () => {
-      texts.forEach((text, index) => {
-        const utterance = makeUtterance(text);
-        utterance.onstart = () => {
+  function speak(texts, hooks) {
+    const done = hooks || {};
+    const list = (texts || []).map((text) => String(text));
+    if (!list.length) {
+      done.onEnd?.();
+      return;
+    }
+    const my = ++token;
+    try { au.pause(); } catch (error) { /* ignore */ }
+    let i = 0;
+
+    const step = () => {
+      if (my !== token) return;
+      if (i >= list.length) {
+        done.onEnd?.();
+        return;
+      }
+      const index = i;
+      done.onStart?.(index);
+      au.onended = () => {
+        if (my !== token) return;
+        i += 1;
+        step();
+      };
+      au.onerror = () => {
+        if (my !== token) return;
+        fallbackSpeak(list, done, index, my);
+      };
+      au.src = srcFor(list[index]);
+      au.playbackRate = 1;
+      const play = au.play();
+      if (play && play.catch) {
+        play.catch(() => {
           if (my !== token) return;
-          heard = true;
-          done.onStart?.(index);
-        };
-        utterance.onend = () => {
-          if (my !== token) return;
-          if (index === texts.length - 1) done.onEnd?.();
-        };
-        utterance.onerror = (event) => {
-          if (my !== token) return;
-          const reason = event.error || "error";
-          if (reason === "canceled" || reason === "interrupted") return;
-          done.onError?.(reason);
-        };
-        synth.speak(utterance);
-      });
-      if (synth.paused) synth.resume();
+          done.onError?.("not-allowed");
+        });
+      }
     };
 
-    /* Speak in this turn so mobile browsers treat it as a user gesture. */
-    enqueue();
-    armKeepAlive(my);
-    window.setTimeout(() => {
-      if (my !== token || heard) return;
-      if (synth.speaking || synth.pending) return;
-      enqueue();
-    }, 160);
+    step();
   }
 
   window.DutchSpeech = {
-    RATE,
+    RATE: 0.85,
     init,
     speak,
     stop,
     watch,
-    chooseVoice,
+    chooseVoice: function () { return { name: "nl-NL-FennaNeural" }; },
     get support() {
       return support;
     },
