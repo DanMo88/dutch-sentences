@@ -463,8 +463,10 @@
           updateSpeechProblem();
           return;
         }
-        state.speechBlocked = true;
-        updateVoiceBanner();
+        if (["unsupported", "synthesis-failed", "language-unavailable", "voice-unavailable", "audio-busy"].includes(reason)) {
+          state.speechBlocked = true;
+          updateVoiceBanner();
+        }
       },
     });
   }
