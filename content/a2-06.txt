@@ -1,0 +1,179 @@
+## 76 | A2 | دنبال خانه
+Ik zoek een huurhuis. | دنبال خانه اجاره‌ای می‌گردم.
+- Het huurhuis یعنی خانه اجاره‌ای. Huren یعنی اجاره کردن.
+Hoeveel is de huur per maand? | اجاره ماهانه چقدر است؟
+- Per maand یعنی ماهانه.
+Is de huur inclusief gas en licht? | اجاره شامل گاز و برق است؟
+- Inclusief یعنی شامل. Gas en licht یعنی گاز و برق.
+Wanneer kan ik het huis bekijken? | کی می‌توانم خانه را ببینم؟
+- Bekijken یعنی دیدن، بازدید کردن.
+Het appartement is gemeubileerd. | آپارتمان مبله است.
+- Gemeubileerd یعنی مبله.
+Ik moet een borg betalen. | باید ودیعه بپردازم.
+- De borg یعنی ودیعه.
+Zijn huisdieren toegestaan? | حیوان خانگی مجاز است؟
+- Het huisdier یعنی حیوان خانگی. Toegestaan یعنی مجاز.
+Het huis ligt dicht bij het station. | خانه نزدیک ایستگاه است.
+- Liggen برای جای ساختمان‌ها و شهرها. Dicht bij یعنی نزدیکِ.
+Ik wil het huurcontract goed lezen. | می‌خواهم قرارداد اجاره را خوب بخوانم.
+- Het huurcontract یعنی قرارداد اجاره.
+Vanaf wanneer is het huis vrij? | خانه از کی خالی است؟
+- Vanaf یعنی از (به بعد).
+Ik heb het huis gehuurd. | خانه را اجاره کردم.
+- Huren ← gehuurd.
+>> Ik zoek al maanden een huis. | ماه‌هاست دنبال خانه می‌گردم.
+>> Gisteren heb ik een appartement bekeken. | دیروز یک آپارتمان دیدم.
+>> Het ligt dicht bij het station en het is licht. | نزدیک ایستگاه است و روشن.
+>> De huur is negenhonderd euro per maand, inclusief gas en licht. | اجاره ماهی نهصد یورو است، با گاز و برق.
+>> Ik moet een borg betalen, maar ik ben heel blij! | باید ودیعه بدهم، ولی خیلی خوشحالم!
+!! liggen برای جای ساختمان و شهر: Het huis ligt bij het station. Vanaf یعنی از (به بعد).
+
+## 77 | A2 | مشکل در خانه
+De verwarming doet het niet. | شوفاژ کار نمی‌کند.
+- Het doen یعنی کار کردن (برای دستگاه). De verwarming یعنی گرمایش.
+Er is een lekkage in de badkamer. | در حمام نشتی آب هست.
+- De lekkage یعنی نشتی.
+De kraan lekt. | شیر آب چکه می‌کند.
+- De kraan یعنی شیر آب. Lekken یعنی چکه کردن.
+Het licht is kapot. | چراغ خراب است.
+- Het licht این‌جا یعنی چراغ. Kapot یعنی خراب.
+De wc is verstopt. | توالت گرفته.
+- Verstopt یعنی گرفته، مسدود.
+Ik bel de verhuurder. | به صاحبخانه زنگ می‌زنم.
+- De verhuurder یعنی صاحبخانه.
+Wanneer komt de monteur? | تعمیرکار کی می‌آید؟
+- De monteur یعنی تعمیرکار.
+Het raam gaat niet dicht. | پنجره بسته نمی‌شود.
+- Dichtgaan یعنی بسته شدن. Niet قبل از dicht.
+Er zit schimmel op de muur. | روی دیوار کپک زده.
+- De schimmel یعنی کپک. De muur یعنی دیوار.
+Kunt u het zo snel mogelijk maken? | ممکن است هرچه سریع‌تر درستش کنید؟
+- Zo snel mogelijk یعنی هرچه سریع‌تر. Maken یعنی درست کردن، تعمیر.
+De buren maken veel lawaai. | همسایه‌ها خیلی سروصدا می‌کنند.
+- Het lawaai یعنی سروصدا.
+>> Beste meneer Jansen, | آقای یانسن عزیز،
+>> De verwarming in mijn huis doet het niet. | شوفاژ خانه‌ام کار نمی‌کند.
+>> Het is erg koud en er zit schimmel op de muur in de badkamer. | خیلی سرد است و روی دیوار حمام کپک زده.
+>> Kunt u zo snel mogelijk een monteur sturen? | ممکن است هرچه زودتر یک تعمیرکار بفرستید؟
+>> Met vriendelijke groet, Mina Ahmadi | با احترام، مینا احمدی
+!! برای دستگاهی که کار نمی‌کند بگو: Het doet het niet. نامه رسمی: Beste ...، Met vriendelijke groet.
+
+## 78 | A2 | همسایه‌ها
+Hallo, ik ben de nieuwe buurvrouw. | سلام، من همسایه جدیدم.
+- De buurvrouw یعنی همسایه زن. De buurman همسایه مرد.
+Welkom in de straat! | به این کوچه خوش آمدی!
+- Welkom یعنی خوش آمدی. De straat یعنی خیابان، کوچه.
+Wilt u even binnenkomen? | بفرمایید داخل؟
+- Binnenkomen یعنی داخل آمدن.
+Kunt u mijn pakket aannemen? | می‌توانید بسته‌ام را تحویل بگیرید؟
+- Het pakket یعنی بسته. Aannemen یعنی تحویل گرفتن.
+Ik ben volgende week op vakantie. | هفته بعد مسافرتم.
+- Op vakantie zijn یعنی در مسافرت بودن.
+Wilt u de planten water geven? | ممکن است به گل‌ها آب بدهید؟
+- Water geven یعنی آب دادن.
+Ik geef zaterdag een feestje. | شنبه یک مهمانی کوچک می‌گیرم.
+- Een feestje geven یعنی مهمانی گرفتن.
+Het kan een beetje laat worden. | ممکن است کمی دیر طول بکشد.
+- Laat worden یعنی دیر شدن.
+Sorry voor het lawaai. | ببخشید بابت سروصدا.
+- Sorry voor یعنی ببخشید بابت.
+Onze buren zijn erg behulpzaam. | همسایه‌هایمان خیلی کمک‌کننده‌اند.
+- Behulpzaam یعنی کمک‌کننده.
+We drinken soms samen koffie. | گاهی با هم قهوه می‌خوریم.
+- Soms یعنی گاهی، بعد از فعل.
+>> Gisteren heb ik mijn nieuwe buren ontmoet. | دیروز همسایه‌های جدیدم را دیدم.
+>> Ze heten Kees en Anja. Ze zijn erg aardig. | اسمشان کیس و آنیاست. خیلی مهربان‌اند.
+>> Ze hebben mijn pakket aangenomen. | بسته‌ام را تحویل گرفتند.
+>> Volgende week ben ik op vakantie. | هفته بعد مسافرتم.
+>> Anja geeft dan mijn planten water. | آنیا آن موقع به گل‌هایم آب می‌دهد.
+!! برای خواهش از همسایه: Wilt u...? یا Kunt u...? + فعل آخر.
+
+## 79 | A2 | بانک و پول
+Ik wil een bankrekening openen. | می‌خواهم حساب بانکی باز کنم.
+- De bankrekening یعنی حساب بانکی. Openen یعنی باز کردن.
+Wat is uw rekeningnummer? | شماره حسابتان چیست؟
+- Het rekeningnummer یعنی شماره حساب.
+Ik wil geld overmaken. | می‌خواهم پول واریز کنم.
+- Overmaken یعنی انتقال پول.
+Mijn pinpas is geblokkeerd. | کارت بانکی‌ام مسدود شده.
+- De pinpas یعنی کارت بانکی.
+Ik ben mijn pincode vergeten. | رمز کارتم را فراموش کرده‌ام.
+- De pincode یعنی رمز کارت.
+Hoeveel staat er op mijn rekening? | چقدر در حسابم هست؟
+- Er staat ... op یعنی ... روی/در آن هست.
+Ik krijg mijn salaris aan het eind van de maand. | حقوقم را آخر ماه می‌گیرم.
+- Het salaris یعنی حقوق. Aan het eind van یعنی آخرِ.
+Ik betaal de rekening via de app. | قبض را با اپ می‌پردازم.
+- Via یعنی از طریق.
+Kunt u dit in kleine biljetten wisselen? | می‌توانید این را به اسکناس کوچک خرد کنید؟
+- Het biljet یعنی اسکناس. Wisselen یعنی خرد کردن، عوض کردن.
+Ik wil sparen voor een vakantie. | می‌خواهم برای تعطیلات پس‌انداز کنم.
+- Sparen voor یعنی پس‌انداز برای.
+Ik heb een lening nodig. | وام لازم دارم.
+- De lening یعنی وام.
+>> Toen ik naar Nederland kwam, moest ik een bankrekening openen. | وقتی به هلند آمدم، باید حساب بانکی باز می‌کردم.
+>> Nu krijg ik mijn salaris op mijn rekening. | حالا حقوقم را به حسابم می‌گیرم.
+>> Ik betaal bijna alles met mijn pinpas. | تقریباً همه چیز را با کارتم می‌پردازم.
+>> De huur maak ik elke maand over via de app. | اجاره را هر ماه با اپ واریز می‌کنم.
+>> Elke maand spaar ik een beetje geld. | هر ماه کمی پول پس‌انداز می‌کنم.
+!! overmaken دو تکه است: Ik maak de huur over. Nodig hebben یعنی لازم داشتن.
+
+## 80 | A2 | پست و بسته
+Ik wil dit pakket versturen. | می‌خواهم این بسته را بفرستم.
+- Versturen یعنی فرستادن.
+Hoeveel kost een postzegel? | تمبر چند است؟
+- De postzegel یعنی تمبر.
+Mijn pakket is niet aangekomen. | بسته‌ام نرسیده.
+- Aankomen ← aangekomen، با zijn.
+De bezorger was er niet. | پیک نیامد.
+- De bezorger یعنی پیک، نامه‌رسان.
+Ik kan het pakket ophalen bij het servicepunt. | می‌توانم بسته را از نقطه تحویل بگیرم.
+- Het servicepunt جای تحویل بسته است.
+Waar is de brievenbus? | صندوق پست کجاست؟
+- De brievenbus یعنی صندوق نامه.
+Ik moet een formulier invullen. | باید یک فرم پر کنم.
+- Invullen یعنی پر کردن فرم.
+Het pakket wordt morgen bezorgd. | بسته فردا تحویل داده می‌شود.
+- Worden + فعل گذشته یعنی «می‌شود»: wordt bezorgd.
+Ik wil dit terugsturen. | می‌خواهم این را پس بفرستم.
+- Terugsturen یعنی پس فرستادن.
+Heeft u een track-and-tracecode? | کد رهگیری دارید؟
+- کد رهگیری بسته.
+Stuur me een kaartje uit Iran! | از ایران برایم کارت پستال بفرست!
+- Het kaartje این‌جا یعنی کارت پستال.
+>> Ik heb online schoenen besteld. | آنلاین کفش سفارش دادم.
+>> Het pakket zou gisteren komen, maar ik was niet thuis. | بسته قرار بود دیروز بیاید، ولی خانه نبودم.
+>> Nu moet ik het ophalen bij het servicepunt. | حالا باید آن را از نقطه تحویل بگیرم.
+>> De schoenen zijn te klein. | کفش‌ها کوچک‌اند.
+>> Ik moet ze terugsturen. Wat jammer! | باید پسشان بفرستم. چه حیف!
+!! worden + فعل گذشته یعنی «انجام می‌شود»: Het pakket wordt bezorgd. این ساختار را بعداً بیشتر می‌بینیم.
+
+## 81 | A2 | شهرداری و کارهای اداری
+Ik moet me inschrijven bij de gemeente. | باید در شهرداری ثبت‌نام کنم.
+- Zich inschrijven یعنی ثبت‌نام کردن. De gemeente یعنی شهرداری.
+Ik heb een afspraak bij het loket. | پشت باجه وقت دارم.
+- Het loket یعنی باجه.
+Neem uw paspoort mee. | گذرنامه‌تان را بیاورید.
+- Het paspoort یعنی گذرنامه.
+Ik wil een nieuwe identiteitskaart aanvragen. | می‌خواهم کارت شناسایی جدید درخواست کنم.
+- Aanvragen یعنی درخواست دادن.
+Wat is uw burgerservicenummer? | شماره ملی‌تان (BSN) چیست؟
+- BSN شماره شناسایی هر نفر در هلند است.
+Ik ben verhuisd en ik wil mijn adres wijzigen. | اسباب‌کشی کرده‌ام و می‌خواهم آدرسم را تغییر دهم.
+- Wijzigen یعنی تغییر دادن.
+U moet dit formulier ondertekenen. | باید این فرم را امضا کنید.
+- Ondertekenen یعنی امضا کردن.
+Hoe lang duurt het? | چقدر طول می‌کشد؟
+- Duren یعنی طول کشیدن.
+De kosten zijn vijfenvijftig euro. | هزینه پنجاه‌وپنج یورو است.
+- De kosten یعنی هزینه.
+U krijgt binnen twee weken een brief. | ظرف دو هفته نامه می‌گیرید.
+- Krijgen یعنی گرفتن، دریافت کردن.
+Ik begrijp deze brief niet. Kunt u me helpen? | این نامه را نمی‌فهمم. می‌توانید کمکم کنید؟
+- جمله خیلی مفید!
+>> Vorige week ben ik verhuisd. | هفته پیش اسباب‌کشی کردم.
+>> Ik moest mijn nieuwe adres doorgeven aan de gemeente. | باید آدرس جدیدم را به شهرداری اعلام می‌کردم.
+>> Ik heb online een afspraak gemaakt. | آنلاین وقت گرفتم.
+>> Bij het loket heb ik mijn paspoort laten zien. | پشت باجه گذرنامه‌ام را نشان دادم.
+>> Het duurde maar tien minuten! | فقط ده دقیقه طول کشید!
+!! برای کار اداری: een afspraak maken، een formulier invullen، ondertekenen، aanvragen.
