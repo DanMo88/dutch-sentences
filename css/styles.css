@@ -108,15 +108,18 @@ body[data-screen="done"] {
 }
 
 .home-grow { flex: 1; min-height: 8px; }
-.flag-wrap { display: flex; justify-content: center; }
+.flag-wrap { display: flex; justify-content: center; align-items: center; gap: 14px; }
 .flag {
-  width: min(228px, 74vw);
-  height: auto;
+  height: clamp(62px, 21vw, 98px);
+  width: auto;
+  max-width: 44vw;
   aspect-ratio: 1050 / 600;
   object-fit: contain;
   border-radius: 12px;
   box-shadow: 0 4px 18px #4f46e530;
 }
+
+.flag-nl { aspect-ratio: 900 / 600; }
 
 .eyebrow {
   text-align: center;
@@ -646,6 +649,138 @@ body[data-screen="done"] {
   outline: 3px solid var(--pri);
   outline-offset: 3px;
 }
+
+.next-title {
+  margin-top: -6px;
+  text-align: center;
+  color: var(--mut);
+  font-size: 0.9rem;
+}
+
+.lvl-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 6px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 8px 0;
+  background: var(--bg);
+}
+
+.lvl-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 4px;
+  border-radius: 14px;
+  background: #fff;
+  border: 2px solid #e0e7ff;
+  font-weight: 900;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.lvl-tab small { font-size: 0.72rem; font-weight: 700; color: var(--mut); }
+.lvl-tab.is-on { background: var(--pri); border-color: var(--pri); color: #fff; box-shadow: 0 4px 0 #3730a3; }
+.lvl-tab.is-on small { color: #e0e7ff; }
+
+.lvl-note { color: var(--mut); font-size: 0.88rem; line-height: 1.7; text-align: center; }
+.lvl-note b { color: var(--pri); }
+
+.lesson-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+
+.lesson-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #fff;
+  border: 2px solid #e0e7ff;
+  border-radius: 16px;
+  text-align: start;
+  box-shadow: 0 2px 8px #4f46e50c;
+}
+
+.lesson-row .chevron { width: 18px; height: 18px; color: #c7d2fe; transform: scaleX(-1); flex: none; }
+.lesson-row.is-next { border-color: var(--pri); box-shadow: 0 0 0 3px #e0e7ff; }
+
+.lesson-num {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: #eef2ff;
+  color: var(--pri);
+  font-weight: 900;
+  font-size: 0.95rem;
+}
+
+.lesson-row.is-done .lesson-num { background: var(--okbg); color: var(--ok); }
+.check { width: 22px; height: 22px; }
+.lesson-txt { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.lesson-title { font-weight: 700; font-size: 1rem; line-height: 1.5; }
+.lesson-sub { color: var(--mut); font-size: 0.8rem; }
+
+.reading {
+  margin: 14px 0 6px;
+  padding: 14px 16px 16px;
+  background: #fff;
+  border: 2px solid #e0e7ff;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px #4f46e512;
+}
+
+.reading.is-speaking { border-color: var(--pri); box-shadow: 0 0 0 4px #c7d2fe; }
+.reading-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.reading-kicker { color: var(--pri); font-weight: 900; font-size: 1rem; }
+
+.play-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--pri);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  box-shadow: 0 3px 0 #3730a3;
+}
+
+.play-read .speaker { color: #fff; width: 20px; height: 20px; }
+.play-read:active { transform: scale(0.96); }
+
+.reading-nl {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  text-align: left;
+  direction: ltr;
+  font-family: var(--nl);
+  font-weight: 600;
+  font-size: 1.12rem;
+  line-height: 1.85;
+  color: var(--ink);
+}
+
+.reading-label { margin-top: 12px; color: var(--mut); font-size: 0.8rem; font-weight: 700; }
+.reading-fa { margin-top: 4px; line-height: 2; font-size: 1rem; color: #374151; }
+
+.btn-ghost {
+  margin-top: 10px;
+  min-height: 48px;
+  background: #fff;
+  color: var(--pri);
+  border: 2px solid #e0e7ff;
+}
+
+.done-body { padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
 
 @keyframes pop {
   from { transform: scale(0.92); opacity: 0.45; }

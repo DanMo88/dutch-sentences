@@ -1,36 +1,32 @@
 # Dutch Sentences
 
-A phone-first sample of a Dutch sentence builder for Persian-speaking beginners. This repository is **Lesson 1 only** (absolute A1): eight short sentences for introducing yourself. It is not a full course.
+A phone-first Dutch sentence builder for Persian speakers, from absolute zero (A1) to B2. The name in the interface is **Dutch Sentences**; the rest of the interface is Persian (RTL), Dutch stays LTR.
 
-The name in the interface is **Dutch Sentences**. The rest of the interface is Persian (Farsi), right to left. Dutch words and sentences stay left to right.
+## How a lesson works
 
-## What you do
+1. Read the Persian meaning and tap the Dutch tiles in the right order. Every tap plays that word slowly.
+2. When the order is right the whole sentence plays and a short, simple Persian note opens at the bottom.
+3. After the last sentence, a short Dutch reading text (with full Persian translation) uses the words of the lesson. Tap it to hear it slowly.
 
-1. Open the lesson.
-2. Read the Persian meaning.
-3. Tap Dutch tiles to build the sentence. Tap a tile already in the sentence to take it back.
-4. Every tap speaks that one word slowly in Dutch (`nl-NL`, rate 0.7).
-5. When the order is right, the whole sentence is spoken slowly and a short Persian grammar note opens at the bottom.
-6. A wrong order gets a gentle hint. It does not play the full sentence and it does not open the note.
+Progress is stored only in the browser (`localStorage`). No accounts, no analytics.
 
-## Run it locally
+## Content
 
-From this folder:
+Lessons are written in `content/*.txt` (simple text format, described at the top of `tools/build.py`) and built into `data/course.json` and `data/lessons/NNN.json`:
+
+```bash
+python3 tools/build.py        # validate + build JSON + tools/tts_jobs.json
+python3 tools/tts.py          # generate missing MP3s (edge-tts, nl-NL-FennaNeural, rate -15%)
+```
+
+Audio files: `audio/w-<slug>.mp3` (words, deduplicated), `audio/s-<slug>.mp3` (sentences), `audio/r-NNN.mp3` (reading text of lesson NNN). The browser `speechSynthesis` is only a fallback when an MP3 is missing.
+
+## Run locally
 
 ```bash
 python3 -m http.server 8741
 ```
 
-Then open [http://127.0.0.1:8741](http://127.0.0.1:8741).
-
-Any static file server works. For GitHub Pages, publish the repository root. There is no build step, no server, and no account.
-
-## Speech
-
-Audio uses the browser Web Speech API (`speechSynthesis`) with `lang="nl-NL"`. The page prefers a Dutch voice whose name contains Nederlands, Netherlands, Dutch, or Fenna, then any `nl` voice, then the browser default. Speech starts from a tap, so mobile browsers allow it.
-
-On a phone, turn on a Dutch (Nederlands) voice in the system settings if the pronunciation falls back to another language. Nothing is recorded. There is no microphone.
-
 ## Fonts
 
-Vazirmatn, Outfit, and Fraunces are included under the SIL Open Font License 1.1. See `fonts/NOTICE.md`.
+Vazirmatn under the SIL Open Font License 1.1. See `fonts/NOTICE.md`.

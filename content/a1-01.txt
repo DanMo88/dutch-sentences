@@ -1,0 +1,38 @@
+## 1 | A1 | معرفی خودت
+Ik heet Sara. | اسم من سارا است.
+- Ik یعنی من. Heet یعنی اسمم هست.
+- پس Ik heet Sara یعنی اسم من سارا است.
+Ik ben student. | من دانشجو هستم.
+- Ben یعنی هستم. فقط با ik می‌آید: ik ben.
+- برای شغل، قبل از اسم شغل چیزی نمی‌گذاریم: Ik ben student.
+Ik woon in Amsterdam. | من در آمستردام زندگی می‌کنم.
+- Woon یعنی زندگی می‌کنم. In یعنی در.
+- فعل همیشه کلمه دوم جمله است: Ik woon.
+Ik kom uit Iran. | من اهل ایران هستم.
+- Ik kom uit یعنی من از ... می‌آیم؛ یعنی اهل آن‌جا هستم.
+- اسم کشور را بعد از uit بگذار: uit Iran.
+Ik spreek een beetje Nederlands. | من کمی هلندی حرف می‌زنم.
+- Spreek یعنی حرف می‌زنم. Een beetje یعنی کمی.
+- اسم زبان‌ها با حرف بزرگ نوشته می‌شود: Nederlands.
+Hoe heet je? | اسمت چیست؟
+- Hoe یعنی چطور. Je یعنی تو.
+- در سؤال، فعل قبل از je می‌آید: heet je.
+Waar woon je? | کجا زندگی می‌کنی؟
+- Waar یعنی کجا.
+- اول کلمه سؤالی، بعد فعل، بعد je: Waar woon je?
+Ik leer Nederlands. | من هلندی یاد می‌گیرم.
+- Leer یعنی یاد می‌گیرم.
+- ساختار مثل قبل است: Ik + فعل + بقیه.
+Ik werk in Utrecht. | من در اوترخت کار می‌کنم.
+- Werk یعنی کار می‌کنم.
+- بعد از in اسم شهر می‌آید: in Utrecht.
+Ik drink koffie. | من قهوه می‌نوشم.
+- Drink یعنی می‌نوشم. Koffie یعنی قهوه.
+- کلمه koffie با de می‌آید: de koffie. ولی این‌جا لازم نیست.
+>> Hallo! Ik heet Sara. | سلام! اسم من سارا است.
+>> Ik kom uit Iran. | من اهل ایران هستم.
+>> Ik woon in Amsterdam. | در آمستردام زندگی می‌کنم.
+>> Ik ben student. Ik leer Nederlands. | دانشجو هستم. هلندی یاد می‌گیرم.
+>> Ik spreek een beetje Nederlands. | کمی هلندی حرف می‌زنم.
+>> Ik drink koffie. Hoe heet je? En waar woon je? | قهوه می‌نوشم. اسم تو چیست؟ و کجا زندگی می‌کنی؟
+!! در جمله‌های معمولی، فعل کلمه دوم است: Ik woon. در سؤال، فعل قبل از je می‌آید: Waar woon je?

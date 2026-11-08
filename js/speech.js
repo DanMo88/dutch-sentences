@@ -6,8 +6,11 @@
   const au = new Audio();
   au.preload = "auto";
 
+  /* Must match tools/build.py slug(). */
   function slug(text) {
-    return String(text).trim().replace(/[.?!]+$/g, "").toLowerCase().replace(/\s+/g, "-");
+    return String(text).trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")
+      .slice(0, 100).replace(/-+$/g, "");
   }
 
   function srcFor(text) {
@@ -53,7 +56,7 @@
       const index = startAt + offset;
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = "nl-NL";
-      utterance.rate = 0.7;
+      utterance.rate = 0.75;
       utterance.onstart = () => {
         if (my !== token) return;
         done.onStart?.(index);
@@ -74,7 +77,10 @@
 
   function speak(texts, hooks) {
     const done = hooks || {};
-    const list = (texts || []).map((text) => String(text));
+    const items = (texts || []).map((item) => (typeof item === "object" && item
+      ? { text: String(item.text), src: item.src || srcFor(item.text) }
+      : { text: String(item), src: srcFor(item) }));
+    const list = items.map((item) => item.text);
     if (!list.length) {
       done.onEnd?.();
       return;
@@ -100,7 +106,7 @@
         if (my !== token) return;
         fallbackSpeak(list, done, index, my);
       };
-      au.src = srcFor(list[index]);
+      au.src = items[index].src;
       au.playbackRate = 1;
       const play = au.play();
       if (play && play.catch) {
@@ -117,6 +123,7 @@
   window.DutchSpeech = {
     RATE: 0.85,
     init,
+    slug,
     speak,
     stop,
     watch,
