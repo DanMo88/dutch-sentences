@@ -29,6 +29,8 @@
     popId: null,
     loading: false,
     loadError: "",
+    wrongCount: 0,
+    helpMode: false,
   };
 
   let progress = { done: [], at: {} };
@@ -166,6 +168,26 @@
     state.order = order;
     state.placed = [];
     state.status = "building";
+    state.wrongCount = 0;
+    state.helpMode = false;
+    state.justSolved = false;
+    preloadAround();
+  }
+
+  function preloadAround() {
+    if (!state.lesson || typeof DutchSpeech === "undefined" || !DutchSpeech.preload) return;
+    const sentence = current();
+    if (!sentence) return;
+    const srcs = [];
+    wordsOf(sentence).forEach((word) => srcs.push(wordItem(word).src));
+    srcs.push(DutchSpeech.srcFor ? DutchSpeech.srcFor(sentence.nl) : ("audio/s-" + DutchSpeech.slug(sentence.nl.replace(/[.?!]+$/, "")) + ".mp3"));
+    /* Warm next sentence too so the first tap after "next" is still instant. */
+    const next = state.lesson.sentences[state.index + 1];
+    if (next) {
+      wordsOf(next).forEach((word) => srcs.push(wordItem(word).src));
+      srcs.push(DutchSpeech.srcFor ? DutchSpeech.srcFor(next.nl) : ("audio/s-" + DutchSpeech.slug(next.nl.replace(/[.?!]+$/, "")) + ".mp3"));
+    }
+    DutchSpeech.preload(srcs);
   }
 
   function bankTiles() {
@@ -203,21 +225,53 @@
     return `<p class="feedback building"><span>${esc(primary)}</span><span>${esc(secondary)}</span></p>`;
   }
 
+  function helpButtonHtml() {
+    if (state.helpMode || state.status === "correct") return "";
+    if (state.wrongCount < 2) return "";
+    return `<button type="button" class="btn btn-help" data-action="take-help">کمک گرفتن</button>`;
+  }
+
+  function helpPanelHtml() {
+    if (!state.helpMode || state.status === "correct") return "";
+    const sentence = current();
+    return `
+      <div class="help-panel" role="status">
+        <p class="help-kicker">جمله درست</p>
+        <p class="help-nl" dir="ltr" lang="nl">${esc(sentence.nl)}</p>
+        <p class="help-fa" dir="rtl" lang="fa">${esc(sentence.fa)}</p>
+        <p class="help-tip">واژه بعدی را با رنگ آبی ببین و بگذار سر جایش.</p>
+      </div>`;
+  }
+
   function feedbackHtml() {
+    if (state.helpMode && state.status !== "correct") {
+      return `${helpPanelHtml()}<p class="feedback building"><span>${esc("جمله درست را ببین و با راهنما بساز.")}</span></p>`;
+    }
     if (state.status === "wrong") {
       const marks = fitMarks();
       const text = marks.some(Boolean)
         ? "نزدیک شدی. واژه" + Z + "های سبز سر جای خودشان هستند. بقیه را جابه" + Z + "جا کن."
         : "این ترتیب درست نیست. واژه" + Z + "ای را از جمله بردار و جای دیگری بگذار.";
-      return `<p class="feedback wrong">${esc(text)}</p>`;
+      return `<p class="feedback wrong">${esc(text)}</p>${helpButtonHtml()}`;
     }
     if (state.status === "correct") {
       return `<p class="feedback correct">${esc("درست است. لمس هر واژه فقط همان را تکرار می" + Z + "کند.")}</p>`;
     }
-    return hintLine(
+    const base = hintLine(
       "هر واژه را لمس کنی، آهسته می" + Z + "شنوی.",
       "لمس واژه" + E + " داخل جمله، آن را برمی" + Z + "دارد."
     );
+    return base + helpButtonHtml();
+  }
+
+  function nextHintId() {
+    if (!state.helpMode || state.status === "correct") return null;
+    const words = wordsOf(current());
+    const need = words[state.placed.length];
+    if (!need) return null;
+    const used = new Set(state.placed);
+    const match = state.order.find((id) => !used.has(id) && tileById(id).text === need);
+    return match || null;
   }
 
   function tileHtml(tile, mode, fit) {
@@ -228,6 +282,7 @@
     const classes = ["tile"];
     if (state.popId === tile.id) classes.push("pop");
     if (fit) classes.push("is-fit");
+    if (mode === "bank" && nextHintId() === tile.id) classes.push("is-hint");
     return `<button type="button" class="${classes.join(" ")}" data-action="${action}" data-id="${tile.id}" data-word="${esc(tile.text)}" lang="nl" dir="ltr" aria-label="${esc(label)}">${esc(tile.text)}</button>`;
   }
 
@@ -548,8 +603,21 @@
     const word = tileById(id).text;
     state.popId = id;
     if (correct) {
+      /* Help-assisted solve: show briefly, then restart same sentence unaided. */
+      if (state.helpMode) {
+        state.status = "building";
+        state.helpMode = false;
+        state.wrongCount = 0;
+        state.justSolved = false;
+        speakItems([wordItem(word, visual)]);
+        announce("آفرین. حالا همین جمله را بدون کمک دوباره بساز.");
+        deal();
+        render();
+        return;
+      }
       state.status = "correct";
       state.justSolved = true;
+      state.wrongCount = 0;
       rememberAt(state.lesson.id, state.index);
       if (state.index >= state.lesson.sentences.length - 1) markDone(state.lesson.id);
       render();
@@ -559,6 +627,7 @@
     }
     if (complete) {
       state.status = "wrong";
+      state.wrongCount += 1;
       state.shake = true;
       render();
       speakItems([wordItem(word, visual)]);
@@ -568,6 +637,21 @@
     state.status = "building";
     render();
     speakItems([wordItem(word, visual)]);
+  }
+
+  function takeHelp() {
+    if (state.helpMode || state.status === "correct") return;
+    if (state.wrongCount < 2) return;
+    state.helpMode = true;
+    state.status = "building";
+    state.shake = false;
+    /* Keep current placements so the learner can fix from where they are,
+       but if the sentence was fully wrong, clear so they rebuild with the hint. */
+    if (state.placed.length === wordsOf(current()).length) {
+      state.placed = [];
+    }
+    render();
+    announce("جمله درست را ببین و با راهنما بساز.");
   }
 
   function addTile(id) {
@@ -693,6 +777,7 @@
       updateVoiceBanner();
       return;
     }
+    if (action === "take-help") { takeHelp(); return; }
     if (action === "add") { addTile(button.dataset.id); return; }
     if (action === "remove" || action === "replay-word") { onPlaced(button.dataset.id, action); return; }
     if (action === "replay-sentence") {
