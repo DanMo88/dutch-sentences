@@ -201,8 +201,10 @@
   function renderHome() {
     const course = state.course;
     if (!course) {
-      return `<section class="home">${flagsHtml()}<h1 class="home-title" dir="ltr" lang="en">Dutch Sentences</h1>
-        <p class="lede">${state.loadError ? esc(state.loadError) : "در حال آماده" + Z + "سازی درس" + Z + "ها…"}</p></section>`;
+      return `<section class="home">${flagsHtml()}<h1 class="home-title" dir="ltr" lang="nl">Zinsmaken</h1>
+        <p class="credit">ساخته شده توسط <b dir="ltr" lang="en">Daniel Mozafari</b></p>
+        <p class="lede">${state.loadError ? esc(state.loadError) : "در حال آماده" + Z + "سازی درس" + Z + "ها…"}</p>
+        <button type="button" class="inst" data-install>📲 نصب اپ</button></section>`;
     }
     const lessons = allLessons();
     const totalSentences = lessons.reduce((sum, l) => sum + l.count, 0);
@@ -232,10 +234,12 @@
     return `
       <section class="home">
         ${flagsHtml()}
-        <h1 class="home-title" dir="ltr" lang="en">Dutch Sentences</h1>
+        <h1 class="home-title" dir="ltr" lang="nl">Zinsmaken</h1>
+        <p class="credit">ساخته شده توسط <b dir="ltr" lang="en">Daniel Mozafari</b></p>
         <div class="rule" aria-hidden="true"></div>
         <p class="home-sub">جمله${Z}سازی هلندی از صفر تا <bdi dir="ltr" lang="en">B2</bdi></p>
         <p class="lede">واژه${Z}ها را بچین، تلفظ آهسته را بشنو و آخر هر درس یک متن کوتاه بخوان.</p>
+        <button type="button" class="inst" data-install>📲 نصب اپ</button>
         <button type="button" class="btn btn-gold" data-action="open" data-id="${allDone ? 1 : nextId}">${esc(ctaLabel)}</button>
         ${next && !allDone ? `<p class="next-title">${esc(next.titleFa)}</p>` : ""}
         <ul class="facts">
@@ -257,7 +261,7 @@
       <header class="top">
         <button type="button" class="icon-btn" data-action="home" aria-label="بازگشت به فهرست">${iconChevron()}</button>
         <div class="brand">
-          <div class="brand-en" dir="ltr" lang="en">Dutch Sentences</div>
+          <div class="brand-en" dir="ltr" lang="nl">Zinsmaken</div>
           <div class="brand-fa">${sub}</div>
         </div>
         <span class="top-spacer" aria-hidden="true"></span>

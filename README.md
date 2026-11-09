@@ -1,6 +1,6 @@
-# Dutch Sentences
+# Zinsmaken
 
-A phone-first Dutch sentence builder for Persian speakers, from absolute zero (A1) to B2. The name in the interface is **Dutch Sentences**; the rest of the interface is Persian (RTL), Dutch stays LTR.
+A phone-first Dutch sentence builder for Persian speakers, from absolute zero (A1) to B2. The name in the interface is **Zinsmaken** (Dutch for making sentences); the rest of the interface is Persian (RTL), Dutch stays LTR.
 
 ## How a lesson works
 

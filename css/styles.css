@@ -128,6 +128,38 @@ body[data-screen="done"] {
   font-size: 0.95rem;
 }
 
+
+.credit {
+  text-align: center;
+  color: var(--mut);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  margin-top: -2px;
+}
+.credit b {
+  font-family: var(--nl);
+  font-weight: 800;
+  color: var(--ink);
+}
+
+:root { --pwa-accent: #4f46e5; }
+.inst {
+  font: inherit;
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: #fff;
+  background: var(--pri);
+  border: 0;
+  border-radius: 99px;
+  padding: 12px 22px;
+  box-shadow: 0 4px 0 #3730a3;
+  cursor: pointer;
+  display: block;
+  margin: 4px auto 2px;
+  width: fit-content;
+}
+.inst:active { transform: scale(0.97); }
+
 .home-title {
   font-family: var(--fa);
   font-weight: 900;

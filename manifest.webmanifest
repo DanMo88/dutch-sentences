@@ -1,0 +1,21 @@
+{
+  "id": "/dutch-sentences/",
+  "name": "Zinsmaken",
+  "short_name": "Zinsmaken",
+  "description": "Zinsmaken — جمله‌سازی هلندی از صفر تا B2 برای فارسی‌زبان‌ها.",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "/dutch-sentences/?source=pwa",
+  "scope": "/dutch-sentences/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#4f46e5",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable"},
+    {"src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
+    {"src": "icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png"}
+  ]
+}
