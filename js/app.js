@@ -32,13 +32,49 @@
   };
 
   let progress = { done: [], at: {} };
-  try {
-    const saved = JSON.parse(localStorage.getItem(STORE) || "null");
-    if (saved && Array.isArray(saved.done)) progress = { done: saved.done, at: saved.at || {} };
-  } catch (error) { /* ignore */ }
+
+  function nid(id) {
+    return Number(id);
+  }
+
+  function loadProgress() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORE) || "null");
+      if (!saved || !Array.isArray(saved.done)) return;
+      progress = { done: [], at: {} };
+      saved.done.forEach((item) => {
+        const id = nid(item);
+        if (Number.isFinite(id) && !progress.done.includes(id)) progress.done.push(id);
+      });
+      Object.keys(saved.at || {}).forEach((key) => {
+        const id = nid(key);
+        const index = nid(saved.at[key]);
+        if (Number.isFinite(id) && Number.isFinite(index)) progress.at[id] = index;
+      });
+    } catch (error) { /* ignore */ }
+  }
 
   function save() {
     try { localStorage.setItem(STORE, JSON.stringify(progress)); } catch (error) { /* ignore */ }
+  }
+
+  function markDone(id) {
+    id = nid(id);
+    if (!progress.done.includes(id)) progress.done.push(id);
+    delete progress.at[id];
+    save();
+  }
+
+  function rememberAt(id, index) {
+    id = nid(id);
+    if (progress.done.includes(id)) return;
+    progress.at[id] = index;
+    save();
+  }
+
+  loadProgress();
+  if (navigator.storage && navigator.storage.persist) {
+    navigator.storage.persist().catch(() => {});
   }
 
   let active = null;
@@ -81,7 +117,12 @@
   }
 
   function isDone(id) {
-    return progress.done.includes(id);
+    return progress.done.includes(nid(id));
+  }
+
+  function resumeAt(id) {
+    const index = progress.at[nid(id)];
+    return Number.isFinite(index) ? index : 0;
   }
 
   function nextLessonId() {
@@ -210,11 +251,13 @@
     const totalSentences = lessons.reduce((sum, l) => sum + l.count, 0);
     const nextId = nextLessonId();
     const next = lessonMeta(nextId);
-    const started = progress.at[nextId] > 0;
+    const started = resumeAt(nextId) > 0;
     const allDone = lessons.length && lessons.every((l) => isDone(l.id));
+    const doneCount = lessons.filter((l) => isDone(l.id)).length;
+    const donePct = lessons.length ? Math.round((doneCount / lessons.length) * 100) : 0;
     const ctaLabel = allDone
       ? "مرور درس ۱"
-      : (started ? "ادامه" + E + " درس " : (progress.done.length ? "درس بعدی: " : "شروع درس ")) + toFa(nextId);
+      : (started ? "ادامه" + E + " درس " : (doneCount ? "درس بعدی: " : "شروع درس ")) + toFa(nextId);
     const levelTabs = course.levels.map((level) => {
       const done = level.lessons.filter((l) => isDone(l.id)).length;
       return `<button type="button" class="lvl-tab${state.level === level.id ? " is-on" : ""}" data-action="level" data-level="${level.id}" aria-pressed="${state.level === level.id}">
@@ -223,12 +266,24 @@
     const level = course.levels.find((l) => l.id === state.level) || course.levels[0];
     const rows = level.lessons.map((l) => {
       const done = isDone(l.id);
+      const at = resumeAt(l.id);
+      const inProg = !done && at > 0;
       const isNext = l.id === nextId && !allDone;
-      return `<li><button type="button" class="lesson-row${done ? " is-done" : ""}${isNext ? " is-next" : ""}" data-action="open" data-id="${l.id}">
+      const sub = done
+        ? "درس " + toFa(l.id) + " · تمام شد"
+        : inProg
+          ? "ادامه · جمله " + toFa(at + 1) + " از " + toFa(l.count)
+          : "درس " + toFa(l.id) + " · " + toFa(l.count) + " جمله" + (isNext ? " · نوبت توست" : "");
+      const mark = done
+        ? `<span class="lesson-badge">تمام شد</span>`
+        : inProg
+          ? `<span class="lesson-badge is-go">ادامه</span>`
+          : iconChevron();
+      return `<li><button type="button" class="lesson-row${done ? " is-done" : ""}${inProg ? " is-progress" : ""}${isNext ? " is-next" : ""}" data-action="open" data-id="${l.id}">
         <span class="lesson-num">${done ? iconCheck() : toFa(l.id)}</span>
         <span class="lesson-txt"><span class="lesson-title">${esc(l.titleFa)}</span>
-        <span class="lesson-sub">درس ${toFa(l.id)} · ${toFa(l.count)} جمله${isNext ? " · نوبت توست" : ""}</span></span>
-        ${iconChevron()}
+        <span class="lesson-sub">${sub}</span></span>
+        ${mark}
       </button></li>`;
     }).join("");
     return `
@@ -240,6 +295,11 @@
         <p class="home-sub">جمله${Z}سازی هلندی از صفر تا <bdi dir="ltr" lang="en">B2</bdi></p>
         <p class="lede">واژه${Z}ها را بچین، تلفظ آهسته را بشنو و آخر هر درس یک متن کوتاه بخوان.</p>
         <button type="button" class="inst" data-install>📲 نصب اپ</button>
+        <div class="hero-progress">
+          <b>${toFa(doneCount)} از ${toFa(lessons.length)} درس تمام شده</b>
+          <span>${allDone ? "آفرین، کل دوره را تمام کردی." : (doneCount ? "پیشرفت روی همین گوشی می‌ماند و با بستن اپ صفر نمی‌شود." : "هر درسی که تمام کنی اینجا تیک می‌خورد و دفعه بعد سرجایش می‌ماند.")}</span>
+          <div class="track" aria-hidden="true"><div class="fill" style="width:${donePct}%"></div></div>
+        </div>
         <button type="button" class="btn btn-gold" data-action="open" data-id="${allDone ? 1 : nextId}">${esc(ctaLabel)}</button>
         ${next && !allDone ? `<p class="next-title">${esc(next.titleFa)}</p>` : ""}
         <ul class="facts">
@@ -251,7 +311,7 @@
         <div class="lvl-tabs" role="group" aria-label="سطح">${levelTabs}</div>
         <p class="lvl-note"><b>${esc(level.titleFa)}</b> · ${esc(LEVEL_NOTE[level.id] || "")}</p>
         <ol class="lesson-list">${rows}</ol>
-        <p class="fine">میکروفون نمی${Z}خواهد. پیشرفتت فقط روی همین گوشی ذخیره می${Z}شود.</p>
+        <p class="fine">میکروفون نمی${Z}خواهد. درس${Z}هایی که تمام می‌کنی روی همین گوشی می‌مانند و با بستن اپ از صفر شروع نمی${Z}شود.</p>
       </section>
     `;
   }
@@ -490,6 +550,8 @@
     if (correct) {
       state.status = "correct";
       state.justSolved = true;
+      rememberAt(state.lesson.id, state.index);
+      if (state.index >= state.lesson.sentences.length - 1) markDone(state.lesson.id);
       render();
       speakItems([wordItem(word, visual), { text: sentence.nl, visual: { type: "sentence" } }]);
       announce("درست است. نکته" + E + " این جمله پایین صفحه است.");
@@ -531,9 +593,7 @@
 
   function finishLesson() {
     const id = state.lesson.id;
-    if (!progress.done.includes(id)) progress.done.push(id);
-    delete progress.at[id];
-    save();
+    markDone(id);
     state.screen = "done";
     render();
     scrollTop();
@@ -659,6 +719,10 @@
     }
   }
 
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState !== "hidden") return;
+    if (state.screen === "lesson" && state.lesson) rememberAt(state.lesson.id, state.index);
+  });
   DutchSpeech.init();
   DutchSpeech.watch(() => updateVoiceBanner());
   app.addEventListener("click", onClick);
